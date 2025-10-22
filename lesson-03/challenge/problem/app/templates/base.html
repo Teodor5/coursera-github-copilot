@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .todo {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .todo p {
+            margin: 0;
+            color: #333;
+        }
+
+        .todo span {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .todo-actions {
+            margin-top: 10px;
+        }
+
+        .todo-actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #4CAF50;
+            padding: 5px 10px;
+            border: 1px solid #4CAF50;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .todo-actions a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .todo-actions a.delete {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .todo-actions a.delete:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do App</h1>
+
+    <form action="{{ url_for('todos.add') }}" method="post">
+        <label for="title">Todo Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter a new todo" required>
+        <button type="submit">Add Todo</button>
+    </form>
+
+    <hr>
+
+    {% for todo in todo_list %}
+        <div class="todo">
+            <p>{{ todo.title }}</p>
+            <span>{{ 'Complete' if todo.complete else 'Not Complete' }}</span>
+            <div class="todo-actions">
+                <a href="{{ url_for('todos.update', todo_id=todo.id) }}">Toggle Status</a>
+                <a href="{{ url_for('todos.delete', todo_id=todo.id) }}" class="delete">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
