@@ -1,2 +1,28 @@
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+env/
+venv/
+ENV/
 **/venv/*
+env.bak/
+venv.bak/
+.pytest_cache/
+pytest.ini
+
+# SQLite
+instance/
+*.sqlite3
+*.db
